@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{% if peer %}{{ peer.username }}님과 1:1 채팅{% else %}전체 채팅{% endif %}</h1>
+<div id="chat-box" class="chat-box border rounded p-3 mb-3" data-endpoint="{{ url_for('chat.messages_api') }}" data-peer="{{ peer.username if peer else '' }}">
+  {% for message in messages %}<div class="chat-message" data-id="{{ message.id }}"><strong>{{ message.sender.username }}</strong>: <span>{{ message.body }}</span><small class="text-muted ms-2">{{ message.created_at.strftime('%m-%d %H:%M') }}</small></div>{% endfor %}
+</div>
+<form method="post" class="input-group" novalidate>{{ form.hidden_tag() }}{{ form.body(class="form-control", autocomplete="off") }}{{ form.submit(class="btn btn-primary") }}</form>
+{% for error in form.body.errors %}<div class="text-danger">{{ error }}</div>{% endfor %}
+{% endblock %}
+

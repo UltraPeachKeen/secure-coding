@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row g-4">
+  {% if product.image_filename %}<div class="col-md-5"><img class="img-fluid rounded" src="{{ url_for('products.uploaded_file', filename=product.image_filename) }}" alt="{{ product.title }}"></div>{% endif %}
+  <div class="col"><h1>{{ product.title }}</h1><p class="fs-4">{{ '{:,}'.format(product.price) }}원</p><p class="pre-wrap">{{ product.description }}</p>
+    <p>판매자: <a href="{{ url_for('auth.profile', username=product.seller.username) }}">{{ product.seller.username }}</a></p>
+    <p>상태: {{ product.status }}</p>
+    {% if current_user.is_authenticated and current_user.id == product.seller_id %}
+      <a class="btn btn-primary" href="{{ url_for('products.edit', product_id=product.id) }}">수정</a>
+      <form class="d-inline" method="post" action="{{ url_for('products.delete', product_id=product.id) }}" data-confirm="정말 삭제하시겠습니까?">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="btn btn-danger">삭제</button>
+      </form>
+    {% elif current_user.is_authenticated %}
+      <a class="btn btn-outline-primary" href="{{ url_for('chat.direct_chat', username=product.seller.username) }}">판매자와 채팅</a>
+      <a class="btn btn-outline-danger" href="{{ url_for('reports.report_product', product_id=product.id) }}">상품 신고</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+

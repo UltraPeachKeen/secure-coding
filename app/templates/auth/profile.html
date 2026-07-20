@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}{{ profile_user.username }} 프로필{% endblock %}
+{% block content %}
+<h1>{{ profile_user.username }}</h1>
+<p>{{ profile_user.bio or '소개글이 없습니다.' }}</p>
+<span class="badge text-bg-{{ 'success' if profile_user.status == 'active' else 'secondary' }}">{{ profile_user.status }}</span>
+{% if current_user.is_authenticated and current_user.id != profile_user.id and profile_user.role != 'admin' %}
+  <a class="btn btn-outline-danger btn-sm" href="{{ url_for('reports.report_user', user_id=profile_user.id) }}">사용자 신고</a>
+  <a class="btn btn-outline-primary btn-sm" href="{{ url_for('chat.direct_chat', username=profile_user.username) }}">1:1 채팅</a>
+{% endif %}
+{% endblock %}
+

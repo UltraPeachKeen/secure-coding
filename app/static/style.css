@@ -1,0 +1,6 @@
+body { background: #f8f9fa; }
+.product-image { height: 220px; object-fit: cover; }
+.pre-wrap { white-space: pre-wrap; }
+.chat-box { height: 420px; overflow-y: auto; background: #fff; }
+.chat-message { padding: .35rem 0; overflow-wrap: anywhere; }
+

@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block content %}<h1>내 상품</h1>
+<div class="list-group">{% for product in products %}<a class="list-group-item list-group-item-action" href="{{ url_for('products.detail', product_id=product.id) }}">{{ product.title }} · {{ '{:,}'.format(product.price) }}원 · {{ product.status }}</a>{% else %}<p>등록한 상품이 없습니다.</p>{% endfor %}</div>
+{% endblock %}
+

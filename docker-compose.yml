@@ -1,0 +1,17 @@
+name: tiny-market
+
+services:
+  web:
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "5000:5000"
+    volumes:
+      - market_instance:/app/instance
+      - market_uploads:/app/uploads
+    restart: unless-stopped
+
+volumes:
+  market_instance:
+  market_uploads:

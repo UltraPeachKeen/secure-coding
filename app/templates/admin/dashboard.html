@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% block content %}<h1>관리자 대시보드</h1>
+<div class="row g-3 mb-4">{% for key, value in counts.items() %}<div class="col"><div class="card card-body"><strong>{{ key }}</strong><span class="display-6">{{ value }}</span></div></div>{% endfor %}</div>
+<div class="list-group"><a class="list-group-item" href="{{ url_for('admin.users') }}">사용자 관리</a><a class="list-group-item" href="{{ url_for('admin.products') }}">상품 관리</a><a class="list-group-item" href="{{ url_for('admin.reports') }}">신고 관리</a><a class="list-group-item" href="{{ url_for('admin.transfers') }}">거래 내역</a><a class="list-group-item" href="{{ url_for('admin.audit_logs') }}">감사 로그</a></div>{% endblock %}
+

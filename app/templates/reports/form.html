@@ -1,0 +1,3 @@
+{% extends "base.html" %}{% from "_form.html" import render_form %}
+{% block content %}<h1>신고</h1><p>대상: {{ target_label }}</p>{{ render_form(form) }}{% endblock %}
+

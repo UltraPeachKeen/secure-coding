@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% from "_form.html" import render_form %}
+{% block title %}회원가입{% endblock %}
+{% block content %}<h1>회원가입</h1><p class="text-muted">아이디 3~32자, 비밀번호 10자 이상</p>{{ render_form(form) }}{% endblock %}
+

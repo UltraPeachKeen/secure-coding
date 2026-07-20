@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3"><h1>중고 상품</h1></div>
+<form method="get" class="input-group mb-4" role="search">
+  <input class="form-control" name="q" maxlength="100" value="{{ q }}" placeholder="상품명 또는 설명 검색">
+  <button class="btn btn-primary">검색</button>
+</form>
+<div class="row g-3">
+{% for product in products %}
+  <div class="col-md-4"><div class="card h-100">
+    {% if product.image_filename %}<img class="card-img-top product-image" src="{{ url_for('products.uploaded_file', filename=product.image_filename) }}" alt="{{ product.title }}">{% endif %}
+    <div class="card-body"><h2 class="h5">{{ product.title }}</h2><p>{{ '{:,}'.format(product.price) }}원</p><a class="stretched-link" href="{{ url_for('products.detail', product_id=product.id) }}">상세 보기</a></div>
+  </div></div>
+{% else %}<p class="text-muted">표시할 상품이 없습니다.</p>{% endfor %}
+</div>
+{% endblock %}
+

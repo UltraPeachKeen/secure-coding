@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% from "_form.html" import render_form %}
+{% block content %}
+<h1>가상 잔액 송금</h1><p class="lead">현재 잔액 {{ '{:,}'.format(current_user.balance) }}원</p>{{ render_form(form) }}
+<h2 class="mt-5">송금 내역</h2>
+<div class="table-responsive"><table class="table"><thead><tr><th>시각</th><th>보낸 사람</th><th>받는 사람</th><th class="text-end">금액</th></tr></thead><tbody>
+{% for item in history %}<tr><td>{{ item.created_at.strftime('%Y-%m-%d %H:%M') }}</td><td>{{ item.sender.username }}</td><td>{{ item.receiver.username }}</td><td class="text-end">{{ '{:,}'.format(item.amount) }}원</td></tr>{% else %}<tr><td colspan="4">내역이 없습니다.</td></tr>{% endfor %}
+</tbody></table></div>
+{% endblock %}
+
